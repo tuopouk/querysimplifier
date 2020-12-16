@@ -1,0 +1,22 @@
+PowerBI:ssä POST queryn tekeminen REST-rajapintaan toimii seuraavasti
+
+let
+url = "https://XXX/api/",
+body = "{""token"": ""XXXXXX"",""content"":""record"",""format"":""json"",""type"":""flat"",""returnformat"":""json"" 
+}",
+Source = Json.Document(Web.Contents(url,[ 
+Headers = [#"Content-Type"="application/json"],
+Content = Text.ToBinary(body) 
+] 
+))
+in
+Source
+
+
+
+Liitteenä oleva koodinpätkä tekee sen, että Tilastokeskukselta saatava body voidaan sieventää sellaiseksi, että se sopii M-Query formaattiin. Käytännössä se vaihtaa lainausmerkkien tyyppiä.
+
+Täällä on esim. Tilastokeskuksen väestöennustedata kunnittain. Kun klikkaa lisätietoja ja lisää sovellukseen, aukeaa koodinpätkä. Querysimplifierin avulla se voidaan sieventää
+siten, että se voidaan vain kopioda liittää yllä olevan M-Queryn body-muuttujan arvoksi.
+http://pxnet2.stat.fi/PXWeb/pxweb/fi/StatFin/StatFin__vrm__vaenn/statfin_vaenn_pxt_128v.px/table/tableViewLayout1/
+
